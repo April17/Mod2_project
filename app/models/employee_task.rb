@@ -1,0 +1,2 @@
+class EmployeeTask < ApplicationRecord
+end
