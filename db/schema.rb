@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_06_17_202225) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "employee_tasks", force: :cascade do |t|
     t.decimal "hours_done"
     t.integer "task_id"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_06_17_202225) do
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
     t.integer "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 2019_06_17_202225) do
   create_table "managers", force: :cascade do |t|
     t.string "name"
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_06_17_202225) do
     t.string "name"
     t.integer "project_id"
     t.decimal "total_working_time"
+    t.decimal "total_working_done", default: "0.0"
     t.integer "pre_task", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

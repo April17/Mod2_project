@@ -5,18 +5,46 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-manager1 = Manager.create(name: "Tom Jaky", username: "tom413", password: "tom413")
+require 'faker'
 
-project1 = Project.create(name: "Mod2 Project", description: "Project management tool for Manager and employee", manager: manager1)
+Manager.destroy_all
+Employee.destroy_all
+Task.destroy_all
+Project.destroy_all
+EmployeeTask.destroy_all
 
-task1 = Task.create(name: "Task1", project: project1, total_working_time: 20.5)
-task2 = Task.create(name: "Task2", project: project1, total_working_time: 10.5, pre_task: task1.id)
 
-employee1 = Employee.create(name: "Tim Dunky", username:"tim413", password:"tim413", manager: manager1)
-employee2 = Employee.create(name: "Kim Junky", username:"kim413", password:"kim413", manager: manager1)
 
-et1 = EmployeeTask.create(hours_done: 5.5, task: task1, employee: employee1)
-et2 = EmployeeTask.create(hours_done: 15.0, task: task1, employee: employee2)
+counter = 0
+5.times do
+  Manager.create(name: Faker::TvShows::GameOfThrones.character, username: "mag#{413+counter}", password: "mag413")
+  counter += 1
+end
+puts "happy manager seeding"
+
+counter = 0
+20.times do
+  Employee.create(name: Faker::Games::LeagueOfLegends.champion, username:"emp#{413+counter}", password: "emp413", manager: Manager.all.sample)
+  counter += 1
+end
+puts "happy employee seeding"
+
+10.times do
+  Project.create(name: Faker::TvShows::GameOfThrones.city, description: Faker::TvShows::GameOfThrones.quote, manager: Manager.all.sample)
+end
+puts "happy project seeding"
+
+80.times do
+  project = Project.all.sample
+  Task.create(name: "#{project.name}-Task", project: project, total_working_done: rand(0..20), total_working_time: rand(20..40))
+end
+puts "happy task seeding"
+
+40.times do
+  EmployeeTask.create(hours_done: rand(0..10), task: Task.all.sample, employee: Employee.all.sample)
+end
+
+
 
 
 puts "happy seeding"
