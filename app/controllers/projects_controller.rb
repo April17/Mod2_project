@@ -1,8 +1,16 @@
 class ProjectsController < ApplicationController
+  before_action :find_project, only: [:show]
+  before_action :manager?, only: [:show, :new]
+
+  def show
+    @quote = Faker::Movies::StarWars.quote
+    @employees = @project.manager.employees
+    @tasks = @project.tasks
+  end
 
   def new
     username = session[:user_username]
-    if username.include?("mag")
+    if manager?
       @manager = Manager.find_by(username: username)
       @project = Project.new
     else
@@ -20,4 +28,13 @@ end
 
 def project_params
   params.require(:project).permit(:name, :description, :manager_id)
+end
+
+def find_project
+  @project = Project.find(params[:id])
+end
+
+def manager?
+  username = session[:user_username]
+  username.include?("mag")
 end
