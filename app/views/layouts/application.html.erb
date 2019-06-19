@@ -9,10 +9,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+
+    </style>
+
   </head>
 
   <body>
-    <%= render partial: 'shared/navbar' %> 
+    <%= render partial: 'shared/navbar' %>
     <%= yield %>
   </body>
 </html>

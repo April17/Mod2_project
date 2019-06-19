@@ -6,7 +6,7 @@ class EmployeeTasksController < ApplicationController
   end
 
   def update
-    @et.update(et_params)
+    @et.update(employee_task_params)
     redirect_to @et.employee
   end
 

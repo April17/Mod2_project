@@ -9,15 +9,16 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs">
-      <h2>Chat</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Dashboard</a></li>
+        <li class="active"><a href="#section1">Inbox</a></li>
         <h3>Manager: </h3>
-        <li><%= link_to @employee.manager.name, @employee.manager %></li>
+        <ul class="list-group">
+          <li class="list-group-item"><%= link_to @employee.manager.name, common_show_path(:username => @employee.manager.username) %></li>
         <h3>Coworkers: </h3>
-        <% @coworkers.each do |coworker| %>
-          <li><%= link_to coworker.name, coworker %></li>
-        <% end %>
+            <% @coworkers.each do |coworker| %>
+              <li class="list-group-item"><%= link_to coworker.name, common_show_path(:username => coworker.username) %><span class="badge"><%= coworker.tasks.count %></span></li>
+            <% end %>
+          </ul>
       </ul><br>
     </div>
     <br>
@@ -39,7 +40,6 @@
                   </p>
                   Total Working Time: <%= employeetask.task.total_working_time %>
                   <br>
-                  <%= link_to "Report Progress", edit_employee_task_path %>
                 </div>
 
                 <div class="progress">
@@ -48,6 +48,8 @@
                     <%= "#{@utility.task_progress(employeetask.task)}" + "%" %>
                   </div>
                 </div>
+
+                <div class="panel-footer"><%= link_to "Report Progress", edit_employee_task_path(employeetask) %></div>
 
               </div>
             </div>
