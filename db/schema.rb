@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_19_103241) do
+ActiveRecord::Schema.define(version: 2019_06_20_124352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "employee_tasks", force: :cascade do |t|
-    t.decimal "hours_done"
+    t.decimal "hours_done", default: "0.0"
     t.integer "task_id"
     t.integer "employee_id"
     t.datetime "created_at", null: false

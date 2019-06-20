@@ -1,13 +1,43 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:edit]
+  before_action :find_task, only: [:edit, :update, :new, :destroy]
+
+  def new
+    @task = Task.new
+    @project_id = session[:project_id]
+    @employees = Manager.find_by(username: session[:user_username]).employees
+    @quote = Faker::Movies::StarWars.quote
+  end
+
+  def create
+    # byebug
+    @task = Task.create(task_params)
+    employee_id_new = params[:task][:employee_ids].reject { |c| c.empty?}
+    employee_id_new = employee_id_new.map{|id| id.to_i}
+    employee_id_old = @task.employee_tasks.map{|et| et.employee_id}
+    @task.add_employee(employee_id_new, employee_id_old)
+    redirect_to @task.project
+  end
 
   def edit
-
+    @employees = @task.project.manager.employees
+    @quote = Faker::Movies::StarWars.quote
   end
 
   def update
+    # byebug
     @task.update(task_params)
+    employee_id_new = params[:task][:employee_ids].reject { |c| c.empty?}
+    employee_id_new = employee_id_new.map{|id| id.to_i}
+    employee_id_old = @task.employee_tasks.map{|et| et.employee_id}
+    @task.add_employee(employee_id_new, employee_id_old)
+    @task.cancel_task(employee_id_new, employee_id_old)
     redirect_to @task.project
+  end
+
+  def destroy
+    project_path = @task.project
+    @task.destroy
+    redirect_to project_path
   end
 
 end
@@ -17,5 +47,5 @@ def find_task
 end
 
 def task_params
-  params.require(:task).permit(:name, :total_working_time)
+  params.require(:task).permit(:name, :total_working_time, :project_id)
 end

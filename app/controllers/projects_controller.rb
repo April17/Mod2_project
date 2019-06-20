@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   before_action :manager?, only: [:show, :new]
 
   def show
+    session[:project_id] = @project.id
     @quote = Faker::Movies::StarWars.quote
     @employees = @project.manager.employees
     @tasks = @project.tasks

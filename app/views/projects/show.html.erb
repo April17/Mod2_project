@@ -10,8 +10,11 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs">
+      <ul class="nav nav-pills nav-stacked create-project">
+        <li id="li" class="active"><a href="/tasks/new">Create Task</a></li>
+      </ul>
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Dashboard</a></li>
+        <li class="active"><a href="#section1">Inbox</a></li>
         <h3>Employees</h3>
         <% @employees.each do |employee| %>
           <li><%= link_to employee.name, common_show_path(:username => employee.username) %></li>
@@ -54,7 +57,11 @@
                   <%= "#{@utility.task_progress(task)}" + "%" %>
                 </div>
               </div>
-              <div class="panel-footer"><%= link_to "Edit Task", edit_task_path(task) %></div>
+              <div class="panel-footer"><%= link_to "Edit", edit_task_path(task) %>
+                <%= form_tag task, method: :delete do %>
+                  <%= submit_tag "Delete" %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>

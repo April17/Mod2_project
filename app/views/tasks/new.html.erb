@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <div class="container text-center">
-    <h1><%= @task.name %></h1>
+    <h1>New Task</h1>
     <p><%= @quote %></p>
   </div>
 </div>
@@ -10,7 +10,6 @@
     <div class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left">
-      <h1>Edit Task</h1>
       <% if flash[:messages] %>
         <p><%= flash[:messages] %></p>
       <% end %>
@@ -22,6 +21,9 @@
         <div class="form-group">
           <%= f.label :total_working_time, "Total Working Time" %>
           <%= f.number_field :total_working_time, :class => "form-control" %>
+        </div>
+        <div class="hidden">
+          <%= f.text_field :project_id, :value => @project_id %>
         </div>
         <div class="form-group">
           <%= f.collection_check_boxes :employee_ids, @employees, :id, :name %>
