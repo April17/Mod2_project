@@ -34,17 +34,23 @@ puts "happy employee seeding"
 end
 puts "happy project seeding"
 
-80.times do
-  project = Project.all.sample
-  Task.create(name: "#{project.name}-Task", project: project, total_working_done: rand(0..20), total_working_time: rand(20..40))
+Project.all.each do |project|
+  rand(2..8).times do
+    Task.create(name: Faker::Movies::StarWars.droid, project: project, total_working_time: rand(20..40))
+  end
 end
 puts "happy task seeding"
 
-40.times do
-  EmployeeTask.create(hours_done: rand(0..10), task: Task.all.sample, employee: Employee.all.sample)
+Task.all.each do |task|
+  employees = task.project.manager.employees
+  rand(1..employees.length).times do
+    employee = employees.sample
+    EmployeeTask.create(hours_done: rand(0..10), task: task, employee: employee)
+    employees = employees - [employee]
+  end
 end
 
-
+puts "happy et seeding"
 
 
 puts "happy seeding"

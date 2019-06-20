@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
   def find_user
     @user_username = session[:user_username]
     @logged_in = !!@user_username
+    if @logged_in
+      if @user_username[0..2] == "emp"
+        @home_path = Employee.find_by(username: @user_username)
+      elsif @user_username[0..2] == "mag"
+        @home_path = Manager.find_by(username: @user_username)
+      end
+    end
   end
 
   def authorized?
