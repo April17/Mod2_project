@@ -16,9 +16,27 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+//  * {
+//    border: 1px solid black;
+//  }
+img {
+  margin-top: 20px;
+  width: 100%;
+
+}
+ .jumbotron {
+  padding-top: 188px;
+  padding-bottom: 60px;
+} 
+
+
 
  .navbar {
     margin-bottom: 0px;
+  }
+
+  .btn-lg, .btn-group-lg > .btn {
+    padding: 10px 76px;
   }
 
 .btn-link, .btn-link:active, .btn-link.active, .btn-link[disabled], fieldset[disabled] .btn-link {

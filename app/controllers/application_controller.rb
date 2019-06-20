@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :authorized?, only: [:hello]
 
   def hello
-
+    @quote = Faker::Games::LeagueOfLegends.quote
   end
 
   def utility
