@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :employee_messages
   resources :mails
   resources :employee_tasks
   resources :tasks

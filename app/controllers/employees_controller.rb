@@ -4,6 +4,7 @@ class EmployeesController < ApplicationController
   def show
     if @employee.username == session[:user_username]
       @employeetasks = @employee.employee_tasks
+      @employee_messages = @employee.received_employee_messages
       @coworkers = @employee.manager.employees - [@employee]
       @quote = Faker::Games::LeagueOfLegends.quote
     else
