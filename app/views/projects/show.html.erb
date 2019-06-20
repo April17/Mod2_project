@@ -10,9 +10,18 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs well">
-      <ul class="nav nav-pills nav-stacked create-project">
-        <li id="li" class="active"><a href="/tasks/new">Create Task</a></li>
-      </ul>
+      <% if @emp_check == false %>
+        <ul class="nav nav-pills nav-stacked create-project">
+          <li id="li" class="active"><a data-toggle="collapse" href="#demo">Create Task</a></li>
+        </ul>
+        <div id="demo" class="collapse">
+          <%= label_tag "# of Task (maxmiun 5)" %>
+          <%= form_tag "/tasks/new", method: :"get" do%>
+            <%= number_field_tag :amount %>
+            <%= submit_tag "Create" %>
+        <% end %>
+        </div>
+        <% end %>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">Inbox</a></li>
         <h3>Employees</h3>
@@ -57,11 +66,13 @@
                   <%= "#{@utility.task_progress(task)}" + "%" %>
                 </div>
               </div>
+              <% if @emp_check == false %>
               <div class="panel-footer"><%= link_to "Edit", edit_task_path(task) %>
                 <%= form_tag task, method: :delete do %>
                   <%= submit_tag "Delete" %>
                 <% end %>
               </div>
+              <% end %>
             </div>
           </div>
         </div>

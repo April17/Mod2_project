@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:edit, :update, :new, :destroy]
 
   def new
+    @amount = params[:amount].to_i
     @task = Task.new
     @project_id = session[:project_id]
     @employees = Manager.find_by(username: session[:user_username]).employees
@@ -9,12 +10,14 @@ class TasksController < ApplicationController
   end
 
   def create
-    # byebug
-    @task = Task.create(task_params)
-    employee_id_new = params[:task][:employee_ids].reject { |c| c.empty?}
-    employee_id_new = employee_id_new.map{|id| id.to_i}
-    employee_id_old = @task.employee_tasks.map{|et| et.employee_id}
-    @task.add_employee(employee_id_new, employee_id_old)
+    tasks_array = create_task_params
+    for i in 0...tasks_array.length do
+      @task = Task.create(tasks_array[i])
+      employee_id_new = params[:tasks][i][:employee_ids].reject { |c| c.empty?}
+      employee_id_new = employee_id_new.map{|id| id.to_i}
+      employee_id_old = @task.employee_tasks.map{|et| et.employee_id}
+      @task.add_employee(employee_id_new, employee_id_old)
+    end
     redirect_to @task.project
   end
 
@@ -47,5 +50,9 @@ def find_task
 end
 
 def task_params
-  params.require(:task).permit(:name, :total_working_time, :project_id)
+  params.require(:task).permit(:name, :total_working_time)
+end
+
+def create_task_params
+  params.require(:tasks).map {|param| param.permit(:name, :total_working_time, :project_id)}
 end
