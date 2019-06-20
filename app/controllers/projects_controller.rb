@@ -3,6 +3,10 @@ class ProjectsController < ApplicationController
   before_action :manager?, only: [:show, :new]
 
   def show
+    @emp_check = false
+    if session[:user_username][0..2] == "emp"
+      @emp_check = true
+    end
     session[:project_id] = @project.id
     @quote = Faker::Movies::StarWars.quote
     @employees = @project.manager.employees
