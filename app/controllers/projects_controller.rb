@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
     if manager?
       @manager = Manager.find_by(username: username)
       @project = Project.new
+      @quote = Faker::Movies::StarWars.quote
     else
       redirect_to employee_path(Employee.find_by(username: session[:user_username]))
     end

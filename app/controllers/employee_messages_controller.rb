@@ -1,0 +1,2 @@
+class EmployeeMessagesController < ApplicationController
+end
