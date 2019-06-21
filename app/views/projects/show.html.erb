@@ -23,7 +23,7 @@
         </div>
         <% end %>
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Inbox</a></li>
+        <li class="active"><%= link_to "Edit Project", edit_project_path(@project) %></li>
         <h3>Employees</h3>
         <% @employees.each do |employee| %>
           <li><%= link_to employee.name, common_show_path(:username => employee.username) %></li>
