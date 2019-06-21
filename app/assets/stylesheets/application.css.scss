@@ -133,6 +133,57 @@ img {
     border-radius: 7px;
   }
 
+// Inbox styling
+
+#employee_message_title {
+  margin-bottom: 10px;
+}
+
+#message form {
+  margin-top: 10px;
+}
+
+.emp-inbox li {
+  margin-bottom: 10px;
+} 
+
+.inbox > a {
+  background-color: #33b751;
+}
+
+.nav-pills > li.inbox > a, .nav-pills > li.inbox > a:hover, .nav-pills > li.inbox > a:focus {
+  color: #fff;
+  background-color: #33b751;
+}
+
+#message > form > input[type=submit]:nth-child(13) {
+  background-color: black;
+  color: #fff;
+  width: 100%;
+}
+
+#message > form > input[type=submit]:nth-child(13):hover {
+  background-color: #fff;
+  color: black;
+  width: 100%;
+}
+
+body > div.container-fluid > div > div.col-sm-3.sidenav.hidden-xs.well.emp-inbox {
+  height: 500px;
+}
+
+body > div.container-fluid > div > div.col-sm-3.sidenav.hidden-xs.well.emp-inbox > ul > ul > li > span {
+  background-color: #337ab7;
+}
+
+#employee_message_title {
+  width: 100%;
+}
+#employee_message_content {
+  width: 100%;
+}
+
+
   /* On small screens, set height to 'auto' for sidenav and grid */
   @media screen and (max-width: 767px) {
     .sidenav {

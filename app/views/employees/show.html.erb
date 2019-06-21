@@ -9,9 +9,9 @@
 
 <div class="container-fluid ">
   <div class="row content ">
-    <div class="col-sm-3 sidenav hidden-xs well">
+    <div class="col-sm-3 sidenav hidden-xs well emp-inbox">
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a data-toggle="collapse" href="#inbox">Inbox<span class="badge"><%= @employee_messages.count %></span></a></li>
+        <li class="active inbox"><a data-toggle="collapse" href="#inbox">Inbox<span class="badge"><%= @employee_messages.count %></span></a></li>
         <div id="inbox" class="panel-collapse collapse">
           <% if @employee_messages == [] %>
             <p>No Message</p>
