@@ -6,25 +6,13 @@
   </div>
 </div>
 
-<div class="container-fluid">
+<div class="common-content container-fluid ">
   <div class="row content">
-    <div class="col-sm-3 sidenav hidden-xs well">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Inbox</a></li>
-        <h3>Manager: </h3>
-        <ul class="list-group">
-          <li class="list-group-item"><%= link_to @user.manager.name, common_show_path(:username => @user.manager.username) %></li>
-        <h3>Coworkers: </h3>
-            <% @coworkers.each do |coworker| %>
-              <li class="list-group-item"><%= link_to coworker.name, common_show_path(:username => coworker.username) %><span class="badge"><%= coworker.tasks.count %></span></li>
-            <% end %>
-          </ul>
-      </ul><br>
-    </div>
+    
     <br>
-    <div class="col-sm-9">
+    <div class="common-task col-sm-9">
       <div class="well">
-        <h4>Task</h4>
+        <h4>Tasks</h4>
         <% @employeetasks.each do |employeetask| %>
           <div class="panel-group">
             <div class="panel panel-default">

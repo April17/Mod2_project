@@ -1,3 +1,25 @@
 // Place all the styles related to the common_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+body > div.common-content > div > div {
+    width: 100%;
+}
+
+body > div.jumbotron.well {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+
+body > div.container-fluid > div > div.col-sm-3.sidenav.hidden-xs.well.emp-inbox {
+    margin-left: 15px;
+}
+
+body > div.container-fluid > div > div.col-sm-9 {
+    width: 73%;
+    padding-right: 0;
+}
+
+
