@@ -13,11 +13,53 @@
 
         <ul class="nav nav-pills nav-stacked create-project">
           <li id="li" class="active"><a href="/projects/new">Create Project</a></li>
-
         </ul>
-
         <ul class="nav nav-pills nav-stacked">
-          <li class="active"><a href="#section1">Inbox</a></li>
+        <li class="active"><a data-toggle="collapse" href="#inbox">Inbox<span class="badge"><%= @manager_messages.count %></span></a></li>
+        <div id="inbox" class="panel-collapse collapse">
+          <ul>
+            Employee Messages
+            <% if @manager_messages == [] %>
+              <p>No Message</p>
+            <% else %>
+              <% @manager_messages.each do |message| %>
+                <li><a data-toggle="collapse" href=<%= "#" + "#{message.id}" %>><%= message.title %> form <%= @utility.sender_name(message) %></a></li>
+                <div id=<%= "#{message.id}" %> class="panel-collapse collapse">
+                  <%= message.content %>
+                </div>
+              <% end %>
+            <% end %>
+          </ul>
+          <br>
+          <ul>
+            Sent Messages
+            <% if @sent_messages == [] %>
+              <p>No Message</p>
+            <% else %>
+              <% @sent_messages.each do |message| %>
+                <li><a data-toggle="collapse" href=<%= "#" + "#{message.id}" %>><%= message.title %> to <%= message.employee.name %></a></li>
+                <div id=<%= "#{message.id}" %> class="panel-collapse collapse">
+                  <%= message.content %>
+                </div>
+              <% end %>
+            <% end %>
+          </ul>
+          <br>
+        </div>
+        <li class="active"><a data-toggle="collapse" href="#message">Send Message</a></li>
+        <div id="message" class="panel-collapse collapse">
+          <%= form_tag "/mails", method: :"post" do%>
+            <%= label_tag "Send to" %>
+            <%= collection_select nil, "manager_message[employee_id]", @message_list, :id, :name %><br>
+            <%= label_tag :title %><br>
+            <%= text_field_tag "manager_message[title]" %><br>
+            <%= text_area_tag "manager_message[content]" %><br>
+            <%= hidden_field_tag "manager_message[manager_id]", @manager.id %>
+            <%= hidden_field_tag "manager_message[sender]", @manager.username %>
+            <%= submit_tag "Send" %>
+          <% end %>
+        </div>
+
 
 
         <h2>Employees</h2>
@@ -28,7 +70,6 @@
         </ul>
         </ul>
 
-
       </div>
       <br>
 
@@ -36,8 +77,8 @@
           <div class="well">
             <h4>News</h4>
               <ul class="list-group">
-                <% @manager.projects.each do |project| %>
-                  <li class="list-group-item"><%= link_to project.name, project %> -- <%= project.description.length > 100? project.description[0..100]+ "..." : project.description %></li>
+                <% @recent_three_messages.each do |message| %>
+                  <li class="list-group-item"><%= "#{message.title} from #{message.employee.name}" %> -- <%= message.content.length > 100? message.content[0..100]+ "..." : message.content %></li>
                 <% end %>
               </ul>
           </div>

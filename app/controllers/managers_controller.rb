@@ -5,6 +5,15 @@ class ManagersController < ApplicationController
   def show
     if @manager.username == session[:user_username]
       @quote = Faker::TvShows::GameOfThrones.quote
+      @message_list = @manager.employees
+      @manager_messages = @manager.mails.select {|mail| mail.sender != @manager.username}
+      @sent_messages = @manager.mails.select {|mail| mail.sender == @manager.username}
+
+      if @manager.mails.length < 3
+        @recent_three_messages = @manager.mails
+      else
+        @recent_three_messages = @manager.mails[-3..-1]
+      end
     else
       redirect_to common_show_path(:username => @manager.username)
     end
