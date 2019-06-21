@@ -1,0 +1,45 @@
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>Account Setting</h1>
+    <h2><%= @manager.name %></h2>
+    <p><%= @quote %></p>
+  </div>
+</div>
+
+<div class="emp_container container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-4 sidenav">
+    </div>
+    <div class="emp_form col-sm-4 text-left">
+    <div class="form_cont">
+      <h2>Edit Account</h2>
+      <% if flash[:messages] %>
+        <p><%= flash[:messages] %></p>
+      <% end %>
+      <%= form_for @manager do |f|%>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => "form-control", placeholder: 'Name' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, :class => "form-control", placeholder: 'Password' %>
+        </div>
+        <div class="form-group">
+          <%= f.label "Confirm Password" %>
+          <%= f.password_field :confirm_password, :class => "form-control", placeholder: 'Confirm Password' %>
+        </div>
+        <%= submit_tag "Update", :class => "btn btn-primary"%>
+      <% end %>
+      <button class="btn btn-danger" data-toggle="collapse" data-target="#demo">Delete Account</button>
+      <div id="demo" class="collapse">
+        <%= form_tag manager_path(@manager), method: :"delete" do %>
+          <%= submit_tag "confirm", :class => "btn btn-danger" %>
+        <% end %>
+      </div>
+      </div>
+    </div>
+    <div class="col-sm-4 sidenav">
+    </div>
+  </div>
+</div>

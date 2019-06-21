@@ -2,11 +2,15 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:edit, :update, :new, :destroy]
 
   def new
-    @amount = params[:amount].to_i
-    @task = Task.new
-    @project_id = session[:project_id]
-    @employees = Manager.find_by(username: session[:user_username]).employees
-    @quote = Faker::Movies::StarWars.quote
+    if @manager_check
+      @amount = params[:amount].to_i
+      @task = Task.new
+      @project_id = session[:project_id]
+      @employees = Manager.find_by(username: session[:user_username]).employees
+      @quote = Faker::Movies::StarWars.quote
+    else
+      redirect_to @user
+    end
   end
 
   def create

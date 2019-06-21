@@ -4,19 +4,24 @@
       <a class="navbar-brand" href="/">Project Management</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><%= link_to "Home", @home_path %></li>
+      <li class="active"><%= link_to "Home", @user %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if @logged_in %>
       <li><a>Hi, <%= @nve_bar_name %></a></li>
+
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account setting
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href=<%= "/show/#{@home_path.username}" %>>View Profile</a></li>
-          <li><a href="#">Edit Account</a></li>
+          <li><a href=<%= "/show/#{@user.username}" %>>View Profile</a></li>
+          <li><%= link_to "Edit Account", @edit_account_path %></li>
+          <% if @manager_check %>
+            <li><%= link_to "Edit Employees", edit_employees_path(@user) %></li>
+          <% end %>
         </ul>
       </li>
+
         <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       <% else %>
         <li><a href="/managers/new"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

@@ -13,15 +13,19 @@ class ApplicationController < ActionController::Base
   end
 
   def find_user
+    @manager_check = false
     @user_username = session[:user_username]
     @logged_in = !!@user_username
     if @logged_in
       if @user_username[0..2] == "emp"
-        @home_path = Employee.find_by(username: @user_username)
-        @nve_bar_name = @home_path.name
+        @user = Employee.find_by(username: @user_username)
+        @nve_bar_name = @user.name
+        @edit_account_path = edit_employee_path(@user)
       elsif @user_username[0..2] == "mag"
-        @home_path = Manager.find_by(username: @user_username)
-        @nve_bar_name = @home_path.name
+        @manager_check = true
+        @user = Manager.find_by(username: @user_username)
+        @nve_bar_name = @user.name
+        @edit_account_path = edit_manager_path(@user)
       end
     end
   end
