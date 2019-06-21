@@ -4,8 +4,8 @@ class ProjectsController < ApplicationController
 
   def show
     @emp_check = false
-    if session[:user_username][0..2] == "emp"
-      @emp_check = true
+    if @project.manager.username == session[:user_username]
+      @edit_check = true
     end
     session[:project_id] = @project.id
     @quote = Faker::Movies::StarWars.quote

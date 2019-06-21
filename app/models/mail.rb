@@ -1,4 +1,7 @@
 class Mail < ApplicationRecord
-  belongs_to :employees
-  belongs_to :managers
+  belongs_to :employee
+  belongs_to :manager
+
+
+
 end

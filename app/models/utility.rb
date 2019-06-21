@@ -32,4 +32,16 @@ class Utility
     task_employees.map{|employee| employee.name}.join(", ")
   end
 
+  def sender_name(mail)
+    if mail.sender[0..2] == "mag"
+      Manager.find_by(username: mail.sender).name
+    elsif mail.sender[0..2] == "emp"
+      Employee.find_by(username: mail.sender).name
+    end
+  end
+
+  def receiver_name(mail)
+    mail.manager.name
+  end
+
 end
