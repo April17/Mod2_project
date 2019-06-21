@@ -29,3 +29,9 @@ body > div.container-fluid > div > div.col-sm-3.sidenav.hidden-xs > ul.nav.nav-p
   background-color: red;
   margin-bottom: 5px;
 }
+
+body > div.container-fluid > div > div.col-sm-3.sidenav.hidden-xs.well > ul.mag-nav.nav.nav-pills.nav-stacked > li:nth-child(1) {
+  margin-bottom: 5px;
+  background-color: forestgreen;
+}
+
