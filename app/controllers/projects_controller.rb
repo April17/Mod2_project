@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :find_project, only: [:show, :edit, :new, :update, :destroy]
-  before_action :manager?, only: [:show, :new]
+  before_action :find_project, only: [:show, :edit, :update, :destroy]
 
   def show
     @edit_check = false

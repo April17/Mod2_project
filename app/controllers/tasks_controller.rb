@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:edit, :update, :new, :destroy]
+  before_action :find_task, only: [:edit, :update, :destroy]
 
   def new
     if @manager_check
