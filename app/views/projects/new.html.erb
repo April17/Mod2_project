@@ -1,17 +1,12 @@
-<div class="jumbotron well">
-  <div class="container">
 
-    <h1 class="display-3">Creat Project</h1>
-    <p><%= @quote %></p>
-  </div >
-</div >
 
-<div class="container-fluid text-center">
+<div class="emp_container container-fluid text-center">
   <div class="row content">
-    <div class="col-sm-2 sidenav">
+    <div class="col-sm-4 sidenav">
     </div>
-    <div class="col-sm-8 text-left">
-      
+    <div class="col-sm-4 text-left">
+      <h1 class="display-3">Creat Project</h1>
+    <p><%= @quote %></p>
       <% if flash[:messages] %>
         <p><%= flash[:messages] %></p>
       <% end %>
@@ -25,10 +20,10 @@
           <%= f.text_area :description, :class => "form-control"%>
         </div>
           <%= f.hidden_field :manager_id, :value => @manager.id %>
-        <%= submit_tag "Submit", :class => "btn btn-default"%>
+        <%= submit_tag "Submit", :class => "btn-create-project btn btn-primary"%>
       <% end %>
     </div>
-    <div class="col-sm-2 sidenav">
+    <div class="col-sm-4 sidenav">
     </div>
   </div>
 </div>
