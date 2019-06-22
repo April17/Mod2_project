@@ -20,10 +20,12 @@ class ApplicationController < ActionController::Base
       if @user_username[0..2] == "emp"
         @user = Employee.find_by(username: @user_username)
         @nve_bar_name = @user.name
+        @home_path = Employee.find_by(username: @user_username)
         @edit_account_path = edit_employee_path(@user)
       elsif @user_username[0..2] == "mag"
         @manager_check = true
         @user = Manager.find_by(username: @user_username)
+        @home_path = Manager.find_by(username: @user_username)
         @nve_bar_name = @user.name
         @edit_account_path = edit_manager_path(@user)
       end

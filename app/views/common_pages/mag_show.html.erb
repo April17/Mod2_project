@@ -9,16 +9,8 @@
 
 <div class="container-fluid">
   <div class=" row content">
-      
+
       <div class="mag-common col-sm-12">
-          <div class="well">
-            <h4>News</h4>
-              <ul class="list-group">
-                <% @manager.projects.each do |project| %>
-                  <li class="list-group-item"><%= link_to project.name, project %> -- <%= project.description.length > 100? project.description[0..100]+ "..." : project.description %></li>
-                <% end %>
-              </ul>
-          </div>
           <div class="well">
             <h4>Projects</h4>
               <% @manager.projects.each do |project| %>

@@ -4,10 +4,10 @@ class EmployeesController < ApplicationController
   def show
     if @employee.username == session[:user_username]
       @employeetasks = @employee.employee_tasks
-      @employee_messages = @employee.received_employee_messages
-      @employee_manager_messages = @employee.mails.select {|mail| mail.sender != @employee.username}
-      @employee_sent_messages = @employee.sent_employee_messages
-      @employee_sent_manager_messages = @employee.mails.select {|mail| mail.sender == @employee.username}
+      @employee_messages = @employee.received_employee_messages.sort_by {|messages| mail.id}.reverse
+      @employee_manager_messages = @employee.mails.select {|mail| mail.sender != @employee.username}.sort_by {|mail| mail.id}.reverse
+      @employee_sent_messages = @employee.sent_employee_messages.sort_by {|messages| mail.id}.reverse
+      @employee_sent_manager_messages = @employee.mails.select {|mail| mail.sender == @employee.username}.sort_by {|mail| mail.id}.reverse
       @coworkers = @employee.manager.employees - [@employee]
       message_list_temp = @employee.manager.employees - [@employee]
       @message_list = message_list_temp

@@ -5,13 +5,13 @@ class ManagersController < ApplicationController
   def show
     if @manager.username == session[:user_username]
       @message_list = @manager.employees
-      @manager_messages = @manager.mails.select {|mail| mail.sender != @manager.username}
-      @sent_messages = @manager.mails.select {|mail| mail.sender == @manager.username}
+      @manager_messages = @manager.mails.select {|mail| mail.sender != @manager.username}.sort_by {|mail| mail.id}.reverse
+      @sent_messages = @manager.mails.select {|mail| mail.sender == @manager.username}.sort_by {|mail| mail.id}.reverse
 
-      if @manager.mails.length < 3
-        @recent_three_messages = @manager.mails
+      if @manager_messages.length < 3
+        @recent_three_messages = @manager_messages
       else
-        @recent_three_messages = @manager.mails[-3..-1]
+        @recent_three_messages = @manager_messages[0..2]
       end
     else
       redirect_to common_show_path(:username => @manager.username)
